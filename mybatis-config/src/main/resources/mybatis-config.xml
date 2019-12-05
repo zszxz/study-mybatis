@@ -16,7 +16,7 @@
                 <!-- 数据库驱动 5.6以上版本使用com.mysql.cj.jdbc.Driver -->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
                 <!-- 数据库路径 -->
-                <property name="url" value="jdbc:mysql://192.168.100.118:3306/mybatis"/>
+                <property name="url" value="jdbc:mysql://192.168.0.105:3306/mybatis"/>
                 <!-- 账号-->
                 <property name="username" value="root"/>
                 <!--密码 -->
@@ -25,8 +25,8 @@
         </environment>
     </environments>
 
-    <!-- 引入自定义mapper.xml -->
+    <!-- 引入自定义mapper.xml 在resource 目录下 -->
     <mappers>
-        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="configMapper/CourseMapper.xml"/>
     </mappers>
 </configuration>

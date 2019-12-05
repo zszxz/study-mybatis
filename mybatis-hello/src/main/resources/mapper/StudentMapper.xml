@@ -9,4 +9,5 @@
         select * from student
     </select>
 
+    <insert id="add"
 </mapper>

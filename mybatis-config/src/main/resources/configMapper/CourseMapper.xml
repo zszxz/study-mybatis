@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zszxz.mybatis.config.mapper.CourseMapper">
+
+    <select id="getCourseList" resultType="com.zszxz.mybatis.config.entity.Course">
+        SELECT * FROM course
+    </select>
+
+    <insert id="addCourse" parameterType="com.zszxz.mybatis.config.entity.Course">
+        INSERT INTO course ( courseName, coursePrice ) VALUES ( #{ courseName },#{ coursePrice });
+    </insert>
+
+    <insert id="addCourseAndGetIdbyGen" parameterType="com.zszxz.mybatis.config.entity.Course" useGeneratedKeys="true" keyProperty="courseId" keyColumn="courseId">
+        INSERT INTO course ( courseName, coursePrice ) VALUES ( #{ courseName },#{ coursePrice });
+    </insert>
+
+    <insert id="addCourseAndGetIdbyKey" parameterType="com.zszxz.mybatis.config.entity.Course">
+        INSERT INTO course ( courseName, coursePrice, courseId ) VALUES ( #{ courseName },#{ coursePrice },#{ courseId });
+        <selectKey resultType="long" order="AFTER" keyProperty="courseId">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <update id="updateCourse" parameterType="com.zszxz.mybatis.config.entity.Course">
+        UPDATE  course set courseName = #{courseName}, coursePrice = #{coursePrice} WHERE courseId = #{courseId}
+    </update>
+
+    <delete id="deleteCourse" parameterType="long">
+        DELETE FROM course WHERE courseId = #{courseId}
+    </delete>
+
+
+</mapper>
+
