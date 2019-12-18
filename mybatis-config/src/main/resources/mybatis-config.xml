@@ -6,6 +6,30 @@
 <!-- mybaits配置 -->
 <configuration>
 
+
+    <!-- 引入resource目录下的配置文件 -->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!--<typeAlias type="com.zszxz.config.entity.Student" alias="student"></typeAlias>-->
+        <package name="com.zszxz.config.entity"/>
+    </typeAliases>
+
+    <!--配置类型处理器，会覆盖默认的类型处理器 -->
+    <typeHandlers>
+        <typeHandler handler="com.zszxz.config.handler.StringTypeHandler"></typeHandler>
+        <!--指定关联jdbc会改变泛型指定 -->
+        <!--<typeHandler handler="com.zszxz.config.handler.StringTypeHandler" javaType="java.lang.String" jdbcType="VARCHAR"></typeHandler>-->
+        <!-- <package name="com.zszxz.config.handler"/>-->
+    </typeHandlers>
+
     <!-- 全局环境配置-->
     <environments default="development">
         <environment id="development">
@@ -13,20 +37,20 @@
             <transactionManager type="JDBC"/>
             <!-- 配置数据源 -->
             <dataSource type="POOLED">
-                <!-- 数据库驱动 5.6以上版本使用com.mysql.cj.jdbc.Driver -->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 数据库路径 -->
-                <property name="url" value="jdbc:mysql://192.168.0.105:3306/mybatis"/>
-                <!-- 账号-->
-                <property name="username" value="root"/>
-                <!--密码 -->
-                <property name="password" value="123456"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <!-- 配置默认值-->
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
 
+
+
     <!-- 引入自定义mapper.xml 在resource 目录下 -->
     <mappers>
-        <mapper resource="configMapper/CourseMapper.xml"/>
+        <mapper resource="zszxzMapper/StudentMapper.xml"/>
     </mappers>
+
 </configuration>

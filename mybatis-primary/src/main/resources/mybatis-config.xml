@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybaits配置 -->
+<configuration>
+
+    <!-- 全局环境配置-->
+    <environments default="development">
+        <environment id="development">
+            <!-- 事物 -->
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据源 -->
+            <dataSource type="POOLED">
+                <!-- 数据库驱动 5.6以上版本使用com.mysql.cj.jdbc.Driver -->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <!-- 数据库路径 -->
+                <property name="url" value="jdbc:mysql://192.168.0.105:3306/mybatis"/>
+                <!-- 账号-->
+                <property name="username" value="root"/>
+                <!--密码 -->
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 引入自定义mapper.xml 在resource 目录下 -->
+    <mappers>
+        <mapper resource="configMapper/CourseMapper.xml"/>
+    </mappers>
+</configuration>
