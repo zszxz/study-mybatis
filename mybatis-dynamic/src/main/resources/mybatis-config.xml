@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybaits配置 -->
+<configuration>
+
+
+    <!-- 引入resource目录下的配置文件 -->
+    <properties resource="db.properties">
+
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.zszxz.dynamic.entity"/>
+    </typeAliases>
+
+    <!-- 全局环境配置-->
+    <environments default="development">
+        <environment id="development">
+            <!-- 事物 -->
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <!-- 配置默认值-->
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+
+    <!-- 引入自定义mapper.xml 在resource 目录下 -->
+    <mappers>
+        <mapper resource="mapper/CustomerMapper.xml"/>
+    </mappers>
+
+</configuration>

@@ -12,6 +12,8 @@
         <module>mybatis-hello</module>
         <module>mybatis-config</module>
         <module>mybatis-config</module>
+        <module>mybatis-typehandler</module>
+        <module>mybatis-dynamic</module>
     </modules>
 
     <dependencies>

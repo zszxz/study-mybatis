@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zszxz.dynamic.mapper.CustomerMapper">
+
+    <resultMap id="customerMap" type="customer" autoMapping="true">
+    </resultMap>
+
+    <sql id="choose">
+        <choose>
+            <when test="customer_name=!null">
+                `gender`
+            </when>
+            <otherwise>
+                *
+            </otherwise>
+        </choose>
+    </sql>
+    <sql id="name">
+        <trim prefix="where" prefixOverrides="and">
+            and `customer_name` = #{customer_name}
+        </trim>
+    </sql>
+    <sql id="condition">
+        <where>
+            <if test="customer_name!=null and customer_name!='' ">
+                and `customer_name` like #{customer_name}
+            </if>
+            <if test="gender!=null and gender!=''">
+                and `gender` = #{gender}
+            </if>
+        </where>
+    </sql>
+    <select id="getCustomer" resultType="com.zszxz.dynamic.entity.Customer" >
+        <bind name="customer_name" value="'%'+customer_name+'%'"/>
+        select
+            *
+        from `customer`
+        <include refid="condition">
+
+        </include>
+
+    </select>
+
+    <select id="getCustomerById" resultType="com.zszxz.dynamic.entity.Customer" >
+        select
+            *
+        from `customer`
+        <where>
+            <if test="ids!=null">
+                and id in
+                <foreach collection="ids" open="(" separator="," item="id" index="i"  close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <insert id="addCustomer" >
+         insert into `customer`(
+            `customer_name`,
+            `gender`,
+            `telephone`,
+            `register_time`
+         )values 
+         <foreach collection="customers"  separator="," item="customer" index="i">
+             (
+                 #{customer.customer_name},
+                 #{customer.gender},
+                 #{customer.telephone},
+                 #{customer.register_time}
+             )
+         </foreach>
+    </insert>
+    
+    <update id="updateCustomer" parameterType="com.zszxz.dynamic.entity.Customer">
+        update `customer`
+        <set>
+            <if test="customer_name!=null">
+                `customer_name` = #{customer_name},
+            </if>
+            <if test="gender!=null">
+                `gender` = #{gender},
+            </if>
+            <if test="telephone!=null">
+                `telephone` = #{telephone},
+            </if>
+            <if test="register_time!=null">
+                `register_time` = #{register_time},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+</mapper>
