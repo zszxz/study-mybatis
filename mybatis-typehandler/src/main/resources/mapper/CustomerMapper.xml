@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zszxz.typehandler.mapper.CustomerMapper">
+
+    <resultMap id="customerMap" type="customer" autoMapping="true">
+        <result column="register_time" property="register_time" typeHandler="com.zszxz.typehandler.handler.TimeStringHandler"></result>
+    </resultMap>
+
+    <select id="getCustomer" resultMap="customerMap" >
+        select * from `customer`
+    </select>
+
+    <insert id="addCustomer" parameterType="customer">
+         insert into `customer`(
+            `customer_name`,
+            `gender`,
+            `telephone`,
+            `register_time`
+         )values (
+            #{customer_name},
+            #{gender},
+            #{telephone},
+            #{register_time,javaType=Long,jdbcType=TIMESTAMP,typeHandler=com.zszxz.typehandler.handler.TimeStringHandler}
+         )
+
+    </insert>
+
+</mapper>
