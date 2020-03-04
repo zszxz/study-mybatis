@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mybatis-plugin" />
+        <module name="mybatis-dynamic" />
+        <module name="mybatis-config" />
         <module name="mybatis-typehandler" />
         <module name="mybatis-primary" />
-        <module name="mybatis-config" />
         <module name="mybatis-hello" />
-        <module name="mybatis-dynamic" />
       </profile>
     </annotationProcessing>
   </component>
